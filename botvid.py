@@ -13,7 +13,7 @@ def send_message(recipient_id, response):
 
 # Fetches the data from database for the user
 def get_message(Day):
-    if (Day != ""):
+    if (Day != "weekly"):
         response = menu_database.get_menu(Day)
     else:
         response = menu_database.get_weekly_menu()
@@ -79,7 +79,7 @@ def receive_message():
         elif message == "unsubscribe":
             unsubscribe(user_id)
         elif message == "menu":
-            response = get_message("")
+            response = get_message("weekly")
             send_message(user_id, response)
         elif message.split()[0] == "menu":
             response = get_message(message.split()[1].capitalize())
