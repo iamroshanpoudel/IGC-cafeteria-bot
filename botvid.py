@@ -12,8 +12,11 @@ def send_message(recipient_id, response):
     return "Message Sent!"
 
 # Fetches the data from database for the user
-def get_message():
-    response = menu_database.get_tabulated_data()
+def get_message(Day):
+    if (Day != ""):
+        response = menu_database.get_menu(Day)
+    else:
+        response = menu_database.get_weekly_menu()
     return response
 
 
@@ -75,8 +78,11 @@ def receive_message():
             subscribe(user_id)
         elif message == "unsubscribe":
             unsubscribe(user_id)
-        elif message == "update":
+        elif message == "menu":
             response = get_message()
+            send_message(user_id, response)
+        elif message.split()[0] == "menu":
+            response = get_message(message.split()[1].Capitalize())
             send_message(user_id, response)
         elif message.split()[0] == "sudo" and authenticate.is_admin(user_id):
             # Allow for admins to check bot status using messenger
@@ -88,7 +94,7 @@ def receive_message():
             send_message(user_id, response)
         else: # Unsupported text message
             send_message(user_id, "Sorry! I am a dumb bot, and I didn't quite understand what you just said.")
-            send_message(user_id, "send 'subscribe' to subscribe, 'unsubscribe' to unsubscribe, and 'menu' to get today's menu")
+            send_message(user_id, "send 'subscribe' to subscribe, 'unsubscribe' to unsubscribe, and 'menu xday' to get menu for xday, 'menu' to get menu for the week")
         return "Message Processed"
 
 # Check whether the user_id is stored in database    

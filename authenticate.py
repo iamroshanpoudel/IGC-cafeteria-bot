@@ -2,16 +2,16 @@ from pymessenger.bot import Bot
 
 import os
 
-ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
-VERIFY_TOKEN = os.environ.get("VERIFICATION_TOKEN")
+ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN_")
+VERIFY_TOKEN = os.environ.get("VERIFICATION_TOKEN_")
 ADMIN = os.environ.get("ADMIN")
 
 #SQL Database
 import mysql.connector
-connection = mysql.connector.connect(user= os.environ.get("DB_USER"),
-                                     password= os.environ.get("DB_PASS"),
-                                     host= os.environ.get("DB_HOST"),
-                                     db= os.environ.get("DB"))
+connection = mysql.connector.connect(user= os.environ.get("DB_USER_"),
+                                     password= os.environ.get("DB_PASS_"),
+                                     host= os.environ.get("DB_HOST_"),
+                                     db= os.environ.get("DB_"))
 
 def verify_bot_access():
     return Bot(ACCESS_TOKEN)
