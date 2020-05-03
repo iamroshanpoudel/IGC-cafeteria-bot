@@ -82,7 +82,7 @@ def receive_message():
             response = get_message("")
             send_message(user_id, response)
         elif message.split()[0] == "menu":
-            response = get_message(message.split()[1].Capitalize())
+            response = get_message(message.split()[1].capitalize())
             send_message(user_id, response)
         elif message.split()[0] == "sudo" and authenticate.is_admin(user_id):
             # Allow for admins to check bot status using messenger
