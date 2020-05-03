@@ -1,3 +1,4 @@
+""" Used for adding/removing/updating menu"""
 import authenticate
 from tabulate import tabulate
 
