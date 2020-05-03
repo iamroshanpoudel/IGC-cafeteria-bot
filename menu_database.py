@@ -27,6 +27,8 @@ Days= {1:"Sunday",
 
 # (2, "L-K", " + Wild Vegetable Bibimbap + Soybean Paste soup with cabbage + Fish Cutlet & Tartar Sauce + Fusilli Salad + Kimchi")   
 def add_menu(day, time_type, m1=DEFAULT_, m2=DEFAULT_, m3=DEFAULT_):
+    connection.ping(reconnect=True)
+    cursor = connection.cursor()
     if time_type == "L-K":
         cursor.execute("UPDATE menu_table SET LUNCH_KOREAN = %s WHERE DAY = %s",(m1, day))
         connection.commit()
@@ -38,6 +40,7 @@ def add_menu(day, time_type, m1=DEFAULT_, m2=DEFAULT_, m3=DEFAULT_):
         connection.commit()
     add_pink_straw()
 
+    
 def add_pink_straw():
     for i in range(1,8):
         day = Days[i]
@@ -65,12 +68,16 @@ def add_particular_menu(day, time, type, menu):
 
 # Resets the weekly menu        
 def clear_week_menu():
+    connection.ping(reconnect=True)
+    cursor = connection.cursor()
     for i in range(1,8):
         day = Days[i]
         cursor.execute("UPDATE menu_table SET BREAKFAST = %s, LUNCH_KOREAN = %s, LUNCH_CHEF_SPECIAL = %s, LUNCH_PINK_STRAW = %s,DINNER =  %s WHERE DAY =  %s", (DEFAULT_,DEFAULT_,DEFAULT_,PINK_DEFAULT,DEFAULT_, day))
         connection.commit()
 
 def get_menu(day):
+    connection.ping(reconnect=True)
+    cursor = connection.cursor()
     cursor.execute("SELECT * FROM menu_table WHERE DAY = %s",(day,))
     menu_tuple = cursor.fetchall()[0]
     tidy_list = [["Type", "Menu"]]
