@@ -84,7 +84,7 @@ def get_menu(day):
     type = ["Day","Breakfast", "Korean (L)", "Chef's Special (L)", "Pink Straw (L)", "Dinner"]
     for i in range(1, len(menu_tuple)):
         tidy_list.append([type[i], menu_tuple[i]])
-    return tabulate(tidy_list, headers="firstrow", tablefmt="jira")
+    return tabulate(tidy_list, headers="firstrow")
 
 def get_weekly_menu():
     to_return = ""
